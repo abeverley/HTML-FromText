@@ -392,7 +392,8 @@ sub paras {
     my ($self) = @_;
 
     my $options = $self->{options};
-    my @paras   = split /\n{2,}/, $self->{html};
+    (my $html = $self->{html}) =~ s/\r//g;
+    my @paras   = split /\n{2,}/, $html;
     my %paras   = map { $_, { text => $paras[$_], html => undef } } 0 .. $#paras;
     $self->{paras} = \%paras;
 
